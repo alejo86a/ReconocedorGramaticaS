@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="gramaticaS">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="css/estilo.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+</head>
+<body>
+	<div id="container" ng-controller="controladorP">
+		<!-- Cabecera-->
+		<header>
+			<h1>Reconocedor Gramaticas S</h1>
+		</header>
+
+		<!-- Menu -->
+		<nav class="">
+		    <ul id="menu">
+		        <li><a ng-click="addFila()"><span>+</span>Fila</a></li><!--
+		     --><li><a ng-click="reiniciar()">Reiniciar</a></li><!--
+		     --><li><a ng-click="validar()">Validar</a></li>
+		    </ul>
+		    <!--
+		     --><blockquote ng-show="esVacio(estadoGramatica)" id="{{estadoGramatica}}" ng-model="estadoGramatica">{{estadoGramatica}}</blockquote></li>
+		</nav>
+		&nbsp;&nbsp;
+		<!-- Gramatica -->
+		<section>
+			<ul id="lineas" ng-repeat="linea in lineas">
+			    <li ng-show="esVacio(linea.noTerminal)"><input type="text" id="no-terminal" ng-model="linea.noTerminal"><img src="images" alt=""/><span> → </span><input type="text" id="produccion" ng-model="linea.produccion"/><button type="button" ng-click="addLambda(linea)"><span>λ</span></button><button id="eliminarF"type="button" ng-click="borrarLinea(linea)">X</button></li>
+			    <li><input type="text" id="no-terminal" ng-model="ultimaLinea.noTerminal"><img src="images" alt=""/><span> → </span><input type="text" id="produccion" ng-model="ultimaLinea.produccion"/><button type="button" ng-click="addLambda(ultimaLinea)">λ</button><button id="eliminarF" type="button" ng-click="borrarLinea(ultimaLinea)">X</button></li>
+			</ul>
+		</section>
+	</div>
+
+	<!-- Footer de creditos -->
+	<footer>
+			<span>by alejo86a && martin</span>
+	</footer>
+
+	
+	<script type="text/javascript" src="js/controlador.js"></script>
+</body>
+</html>

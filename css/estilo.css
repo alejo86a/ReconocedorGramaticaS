@@ -1,0 +1,138 @@
+body{
+	background: #f1f1f1;
+}
+#container{
+	background: #D7DEED;	
+	width: 80%;
+	margin: 0 auto;
+	min-height: 590px;
+	height: 100%;
+	border-radius: 5px;
+}
+
+header {
+	width: 70%;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+header h1{
+	text-align: center;
+	background-color: #CFD8FF;
+	color: #000000;
+	border: 4px groove #1C5A6D;
+	padding: 4px;
+	margin: 5px;
+	font-family: 'trebuchet ms';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-align: center;
+	text-decoration: blink;
+	position: relative;
+	border-radius: 23px;
+	box-shadow: 0px 0px 3px #800000;
+
+}
+nav{
+	position: relative;
+	padding: 40px;
+	min-width: 70%;
+	margin: 0 auto;
+}
+nav ul{
+	width: 70%;
+	margin: 0 auto;
+}
+nav ul li{
+	list-style:none;
+	position:relative;
+	float:left;
+	min-width: 25%;
+	margin-left: 10px;
+
+	background-color: #97FF6B;
+	color: #000000;
+	border: 2px groove #18116D;
+	padding: 10px;
+	margin: 4px;
+	font-family: verdana;
+	font-style: oblique;
+	font-weight: lighter;
+	font-variant: normal;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	visibility: visible;
+	overflow: visible;
+	border-radius: 25px;
+}
+nav ul li:hover{
+	background: #7BDF51;
+}
+nav blockquote{
+	float: right;
+	margin-right: 20px;
+	margin-top: -50px;
+	font-size: 40px;
+}
+nav #Aceptado{
+	color: green;
+}
+
+nav #Rechazado{
+	color: Red;
+}
+section{
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+section li{
+	list-style: none;
+}
+section li input{
+	width: 350px;
+	height: 30px;
+	border-radius: 5px;
+
+	background: #f7f7f7;
+	font-size: 28px;
+}
+section li #no-terminal{
+	width: 200px;
+}
+section li span{
+	font-size: 60px;
+}
+section li button{
+	width: 50px;
+	height: 50px;
+	margin-left: 10px;
+	border-radius: 5px;
+	background: #286af0;
+	font-size: 30px;
+}
+section li button:hover{
+	background: blue;	
+	cursor: pointer;
+}
+section li #eliminarF{
+	color: red;
+}
+footer {
+	position: relative;
+
+	/* Altura total del footer en px con valor negativo */
+
+	margin-top: 3px;
+
+    /* Altura del footer en px. Se han restado los 5px del margen
+    superior mas los 5px del margen inferior
+    */
+    height: 40px;
+    padding:5px 0px;
+    clear: both;
+    background: #286af0;
+    text-align: center;
+    color: #fff;
+}
