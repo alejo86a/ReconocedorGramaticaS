@@ -8,7 +8,8 @@ controller('controladorP', ['$scope', function ($scope) {
 	/**
 	*Declaración de atributos
 	*/
-	$scope.estadoGramatica ='Aceptado';
+	$scope.estadoGramatica ='';
+	$scope.mostrarLineas = false;
 	$scope.ultimaLinea ={		
 		noTerminal : '',
 		produccion :''
@@ -21,22 +22,27 @@ controller('controladorP', ['$scope', function ($scope) {
 	*Declaración de funciones
 	*/
 	$scope.addFila = function(){
-		$scope.lineas.push($scope.ultimaLinea);
-		$scope.ultimaLinea ={		
-		noTerminal : '',
-		produccion :''
-	};
+		if($scope.lineas.length==1 && $scope.mostrarLineas==false){
+			$scope.mostrarLineas = true;
+		}else{
+			$scope.lineas.push($scope.ultimaLinea);
+			$scope.ultimaLinea ={		
+				noTerminal : '',
+				produccion :''
+			};
+		}
 	}
 	$scope.reiniciar = function(){
-	$scope.estadoGramatica ='';
-	$scope.ultimaLinea ={		
-		noTerminal : '',
-		produccion :''
-	};
-	$scope.lineas =[{
-		noTerminal : '',
-		produccion :''
-	}];
+		$scope.estadoGramatica ='';
+		$scope.ultimaLinea ={		
+			noTerminal : '',
+			produccion :''
+		};
+		$scope.lineas =[{
+			noTerminal : '',
+			produccion :''
+		}];
+		$scope.mostrarLineas = false;
 	}
 	$scope.validar = function(){
 
@@ -73,6 +79,12 @@ controller('controladorP', ['$scope', function ($scope) {
 		*/
 		if(linea==$scope.lineas[$scope.lineas.length-1]){
 			console.log("lol");
+		}
+
+		for(var i =0; i<$scope.lineas.length-1;i++){
+			if($scope.lineas[i]==linea){
+				$scope.lineas.splice(i,1);
+			}
 		}
 	}
 }]);

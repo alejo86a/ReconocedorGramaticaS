@@ -27,8 +27,8 @@
 		&nbsp;&nbsp;
 		<!-- Gramatica -->
 		<section>
-			<ul id="lineas" ng-repeat="linea in lineas">
-			    <li ng-show="esVacio(linea.noTerminal)"><input type="text" id="no-terminal" ng-model="linea.noTerminal"><span> → </span><input type="text" id="produccion" ng-model="linea.produccion"/><button type="button" ng-click="addLambda(linea)">λ</button><button id="eliminarF"type="button" ng-click="borrarLinea(linea)">X</button></li>
+			<ul id="lineas"  ng-repeat="linea in lineas" ng-show="mostrarLineas">
+			    <li><input type="text" id="no-terminal" ng-model="linea.noTerminal"><span> → </span><input type="text" id="produccion" ng-model="linea.produccion"/><button type="button" ng-click="addLambda(linea)">λ</button><button id="eliminarF"type="button" ng-click="borrarLinea(linea)">X</button></li>
 			</ul>
 			<ul>
 			    <li><input type="text" id="no-terminal" ng-model="ultimaLinea.noTerminal"><span> → </span><input type="text" id="produccion" ng-model="ultimaLinea.produccion"/><button type="button" ng-click="addLambda(ultimaLinea)">λ</button><button id="eliminarF" type="button" ng-click="borrarLinea(ultimaLinea)">X</button></li>
