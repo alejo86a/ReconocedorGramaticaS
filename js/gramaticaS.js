@@ -1,6 +1,5 @@
-function gramaticaS(producciones, ultProd){
+function gramaticaS(producciones){
 	this.producciones = producciones;
-	this.ultProd = ultProd;
 	this.validar = validar;
 	this.noHayLambdas = noHayLambdas;
 	this.empiezaPorNoTerm = empiezaPorNoTerm;
@@ -38,8 +37,7 @@ function noHayNoTermRepPorProduc(){
 
 function imprimeGramatica(){
 	for(var i=0;i<this.producciones.length;i++){
-		console.log(this.producciones[i].noTerminal
-			+' '+this.producciones[i].produccion);
+		console.log(this.producciones[i].izq
+			+' '+this.producciones[i].der);
 	}
-	console.log(this.ultProd.noTerminal+' '+this.ultProd.produccion);
 }

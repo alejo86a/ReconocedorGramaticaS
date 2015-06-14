@@ -9,47 +9,27 @@ controller('controladorP', ['$scope', function ($scope) {
 	*Declaración de atributos
 	*/
 	$scope.estadoGramatica ='';
-	$scope.mostrarLineas = false;	
-	$scope.ultimaLinea ={		
-		noTerminal : '',
-		produccion :''
-	};
-	$scope.lineas =[{
-		noTerminal : '',
-		produccion :''
+	$scope.mostrarproducciones = false;	
+	$scope.producciones =[{
+		izq : '',
+		der :''
 	}];
-	$scope.gramaticaS = new gramaticaS($scope.lineas, $scope.ultimaLinea);
+	$scope.gramaticaS = new gramaticaS($scope.producciones);
 	/**
 	*Declaración de funciones
 	*/
 	$scope.addFila = function(){
-		if($scope.lineas.length==1 && $scope.mostrarLineas==false){
-			$scope.lineas[$scope.lineas.length-1].noTerminal = 
-			$scope.ultimaLinea.noTerminal;
-			$scope.lineas[$scope.lineas.length-1].produccion = 
-			$scope.ultimaLinea.produccion;
-			$scope.ultimaLinea.noTerminal ='';
-			$scope.ultimaLinea.produccion ='';
-			$scope.mostrarLineas = true;
-		}else{
-			$scope.lineas.push($scope.ultimaLinea);
-			$scope.ultimaLinea ={		
-				noTerminal : '',
-				produccion :''
-			};
-		}
+		$scope.producciones.push({		
+			izq : '',
+			der :''
+		});
 	}
 	$scope.reiniciar = function(){
 		$scope.estadoGramatica ='';
-		$scope.ultimaLinea ={		
-			noTerminal : '',
-			produccion :''
-		};
-		$scope.lineas =[{
-			noTerminal : '',
-			produccion :''
+		$scope.producciones =[{
+			izq : '',
+			der :''
 		}];
-		$scope.mostrarLineas = false;
 	}
 	$scope.validar = function(){
 		$scope.resul = $scope.gramaticaS.validar();
@@ -60,7 +40,7 @@ controller('controladorP', ['$scope', function ($scope) {
 	}
 	/**
 	*cambiar el metodo porque simplemente no esta mostrando
-	*lo que no tienen noTerminal toca mirar si lineas 
+	*lo que no tienen izq toca mirar si producciones 
 	*esta vacio
 	*/
 	$scope.esVacio = function(texto){
@@ -70,27 +50,32 @@ controller('controladorP', ['$scope', function ($scope) {
 			return true;
 		}
 	}
-	$scope.addLambda = function(linea){
-		linea.produccion = linea.produccion+'λ';
+	$scope.addLambda = function(produccion){
+		produccion.der = produccion.der+'λ';
 	}
-	$scope.borrarLinea = function(linea){
+	$scope.borrarproduccion = function(produccion){
 		/**
-		*Tener en cuenta que si es la ultima linea
+		*Tener en cuenta que si es la ultima produccion
 		*la que se quiere borrar toca eliminarla y
-		*quitar la ultima linea de lineas y convertir
-		*esa en la ultima linea
+		*quitar la ultima produccion de producciones y convertir
+		*esa en la ultima produccion
 		*/
-		if(linea==$scope.ultimaLinea){
-			$scope.ultimaLinea =$scope.lineas[$scope.lineas.length-1];
-			$scope.lineas.splice($scope.lineas.length-1,1);
+		if(produccion==$scope.ultimaproduccion){
+			$scope.ultimaproduccion =$scope.producciones[$scope.producciones.length-1];
+			$scope.producciones.splice($scope.producciones.length-1,1);
 		}
-		if(linea==$scope.lineas[$scope.lineas.length-1]){
+		if(produccion==$scope.producciones[$scope.producciones.length-1]){
 			console.log("lol");
 		}
 
-		for(var i =0; i<$scope.lineas.length;i++){
-			if($scope.lineas[i]==linea){
-				$scope.lineas.splice(i,1);
+		for(var i =0; i<$scope.producciones.length;i++){
+			if(i==$scope.producciones.length-1 && i==0){
+				$scope.producciones[$scope.producciones.length-1] = {
+					izq : '',
+					der :''
+				};
+			}else if($scope.producciones[i]==produccion){
+				$scope.producciones.splice(i,1);
 			}
 		}
 	}
