@@ -9,7 +9,7 @@ controller('controladorP', ['$scope', function ($scope) {
 	*Declaración de atributos
 	*/
 	$scope.estadoGramatica ='';
-	$scope.mostrarLineas = false;
+	$scope.mostrarLineas = false;	
 	$scope.ultimaLinea ={		
 		noTerminal : '',
 		produccion :''
@@ -18,11 +18,18 @@ controller('controladorP', ['$scope', function ($scope) {
 		noTerminal : '',
 		produccion :''
 	}];
+	$scope.gramaticaS = new gramaticaS($scope.lineas, $scope.ultimaLinea);
 	/**
 	*Declaración de funciones
 	*/
 	$scope.addFila = function(){
 		if($scope.lineas.length==1 && $scope.mostrarLineas==false){
+			$scope.lineas[$scope.lineas.length-1].noTerminal = 
+			$scope.ultimaLinea.noTerminal;
+			$scope.lineas[$scope.lineas.length-1].produccion = 
+			$scope.ultimaLinea.produccion;
+			$scope.ultimaLinea.noTerminal ='';
+			$scope.ultimaLinea.produccion ='';
 			$scope.mostrarLineas = true;
 		}else{
 			$scope.lineas.push($scope.ultimaLinea);
@@ -45,7 +52,11 @@ controller('controladorP', ['$scope', function ($scope) {
 		$scope.mostrarLineas = false;
 	}
 	$scope.validar = function(){
-
+		$scope.resul = $scope.gramaticaS.validar();
+		console.log("valida");
+		console.log($scope.resul);
+		$scope.gramaticaS.imprimeGramatica();
+		
 	}
 	/**
 	*cambiar el metodo porque simplemente no esta mostrando
@@ -73,15 +84,11 @@ controller('controladorP', ['$scope', function ($scope) {
 			$scope.ultimaLinea =$scope.lineas[$scope.lineas.length-1];
 			$scope.lineas.splice($scope.lineas.length-1,1);
 		}
-		/**
-		*falta eliminar un elemento de lineas (primero toca buscarlo
-		*con un for para hacerle splice a esa posicion)
-		*/
 		if(linea==$scope.lineas[$scope.lineas.length-1]){
 			console.log("lol");
 		}
 
-		for(var i =0; i<$scope.lineas.length-1;i++){
+		for(var i =0; i<$scope.lineas.length;i++){
 			if($scope.lineas[i]==linea){
 				$scope.lineas.splice(i,1);
 			}
