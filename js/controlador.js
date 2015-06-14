@@ -30,11 +30,11 @@ controller('controladorP', ['$scope', function ($scope) {
 			izq : '',
 			der :''
 		}];
+		$scope.gramaticaS = new gramaticaS($scope.producciones);
 	}
 	$scope.validar = function(){
 		$scope.resul = $scope.gramaticaS.validar();
-		console.log("valida");
-		console.log($scope.resul);
+		console.log('error: '+$scope.resul);
 		$scope.gramaticaS.imprimeGramatica();
 		
 	}

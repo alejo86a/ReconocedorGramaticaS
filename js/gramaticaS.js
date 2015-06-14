@@ -2,14 +2,14 @@ function gramaticaS(producciones){
 	this.producciones = producciones;
 	this.validar = validar;
 	this.noHayLambdas = noHayLambdas;
-	this.empiezaPorNoTerm = empiezaPorNoTerm;
+	this.noEmpiezaPorNoTerm = noEmpiezaPorNoTerm;
 	this.noHayNoTermRepPorProduc = noHayNoTermRepPorProduc;
 	this.imprimeGramatica = imprimeGramatica;	
 }
 
 function validar(){
 	if(this.noHayLambdas()){
-		if(this.empiezaPorNoTerm()){
+		if(this.noEmpiezaPorNoTerm()){
 			if(this.noHayNoTermRepPorProduc()){
 				return 0;
 			}else{
@@ -24,11 +24,23 @@ function validar(){
 }
 
 function noHayLambdas(){
-	return true;
+	for(var i=0;i<this.producciones.length;i++){
+		if(this.producciones[i].der.search(/λ/)!=-1){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 
-function empiezaPorNoTerm(){
-	return false;
+function noEmpiezaPorNoTerm(){
+	for(var i=0;i<this.producciones.length;i++){
+		if(this.producciones[i].der[0]=='<'){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
 
 function noHayNoTermRepPorProduc(){
