@@ -119,6 +119,17 @@ txt=txt+"}"+"\n"+"Fin METODO"+"\n";
 
 console.log(rRecursivo[0]);
 
+var f = new fs("/reconocedorRecursivo.js");
+
+var fh = new File("/reconocedorRecursivo.js"); // Open the file for writing
+
+if(fh!=-1) // If the file has been successfully opened
+{
+    var str = rRecursivo[0];
+    fwrite(fh, str); // Write the string to a file
+    fclose(fh); // Close the file 
+}
+
 return rRecursivo;
 
 
