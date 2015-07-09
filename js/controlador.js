@@ -36,6 +36,7 @@ controller('controladorP', ['$scope', function ($scope) {
 		$scope.resul = $scope.gramaticaS.validar();
 		console.log('error: '+$scope.resul);
 		$scope.gramaticaS.imprimeGramatica();
+		$scope.gramaticaS.reconocimientoDecendene();
 		
 	}
 	/**
