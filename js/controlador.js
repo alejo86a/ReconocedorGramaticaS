@@ -94,10 +94,11 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	}
 }])
 .controller('validacionCtrl', ['$scope', function ($scope) {
-	$scope.hilera;
+	$scope.hilera ="";
 	$scope.reconocedor = new reconocedorRecursivo($scope.hilera);
 
 	$scope.validar = function(){
-		$scope.resultado = reconocedor.validar();
+		$scope.reconocedor.setHilera($scope.hilera);
+		$scope.resultado = $scope.reconocedor.esHileraValida();
 	}
 }]);

@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="gramaticaS">
 <head>
 	<title></title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 </head>
-<body ng-app="gramaticaS">
+<body>
 <div ng-controller="validacionCtrl">
 	<input type="text" ng-model="hilera">
 	<button ng-click="validar()">validar</button>
 	<span ng-model="resultado"></span>
+	{{5+5}}
 </div>
 
+
+
+	<script type="text/javascript" src="js/controlador.js"></script>
+	<script type="text/javascript" src="js/reconocedorRecursivo.js"></script>
+	<script type="text/javascript" src="js/gramaticaS.js"></script>
 </body>
 </html>
