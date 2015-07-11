@@ -60,31 +60,31 @@ function reconocimientoDecendene(){  //Crea el codigo recursivo del reconocimien
 	var rRecursivo=[];
 	var vectorNT=construirNT(this.producciones);
 
-	var seleccion = [];
+	var seleccion = [];                                  //Conjunto seleccion de la gramatica ingresada.
 	for (var i = 0; i<this.producciones.length ; i++) {
 		seleccion[i]=this.producciones[i].der[0];
 	};
 
-	for (var j = 0; j < vectorNT.length; j++) {      //Recorreo nT , variable J
+	for (var j = 0; j < vectorNT.length; j++) {      //Recorro nT , variable J
 		var txt="";
-		txt="nT"+vectorNT[j]+"{"+"\n"+"casos de simbolo:"+"\n";
+		txt="function metodo"+j+"(texto,pos)"+"{"+"\n"+"switch(texto[pos]){"+"\n"; // casos de simbolo
         for (var k = 0; k < this.producciones.length; k++) {   //Recorrer Producciones variable K
         	if (this.producciones[k].izq[1]===vectorNT[j]) {
                txt=txt+"case "+seleccion[k]+":"+"\n";          //Se agrega el case respectivo a la seleccion de la produccion
                var prodAux=this.producciones[k].der; 
-               txt=txt+" lea(Simbolo)"+"\n";
+               txt=txt+" pos=pos+1;"+"\n";    //lee(simbolo)
                var cont=0;
                var bool=0;
                  for (var l = 1; l <prodAux.length ; l++) {                  //Se recorre la produccion derecha variable l
                  	
                  	if(prodAux[l]!="<"){
                  		cont=cont+1;
- 						txt=txt+"if simbolo == " + prodAux[l] + " them {"+"\n" + "lea (simbolo)"+"\n"; 
+ 						txt=txt+"if(texto[pos]== " + prodAux[l] + " ) {"+"\n" + "pos=pos+1;"+"\n"; //lea(simbolo)
  						bool=1;
  						
                  	}
                  	if (prodAux[l]=="<") {
-                 		txt=txt+"nT"+prodAux[l+1]+"();"+"\n";
+                 		txt=txt+"metodo"+posNTenVector(prodAux[l+1],vectorNT)+"(texto,pos);"+"\n";//nt+prodAux[l+1]()
                  		l=l+2;
                  	};
 
@@ -92,44 +92,33 @@ function reconocimientoDecendene(){  //Crea el codigo recursivo del reconocimien
 
 
                  };
-                 txt=txt+"return"+"\n";
+                 txt=txt+"return true"+"\n";
 
 
        for (var i = 0; i < cont; i++) {
        	txt=txt+"}"+"\n";
        };
        if(bool==1){
-                 	txt=txt+"Rechace"+"\n";
+                 	txt=txt+"return false"+"\n";
                  };
 
 	
-            txt=txt+"(fin caso);"+"\n";
+            txt=txt+"break;"+"\n";
         	};
 
         };
 
-txt=txt+"else:"+"\n"+"Rechace"+"\n";
-txt=txt+"FINCASOS;"+"\n";
+txt=txt+"default:"+"\n"+"return false"+"\n";
+txt=txt+"}"+"\n";
 
 
-txt=txt+"}"+"\n"+"Fin METODO"+"\n";
+txt=txt+"}"+"\n";
 
    rRecursivo[j]=txt;
 };
 
+console.log(posNTenVector("A",vectorNT));
 console.log(rRecursivo[0]);
-
-var f = new fs("/reconocedorRecursivo.js");
-
-var fh = new File("/reconocedorRecursivo.js"); // Open the file for writing
-
-if(fh!=-1) // If the file has been successfully opened
-{
-    var str = rRecursivo[0];
-    fwrite(fh, str); // Write the string to a file
-    fclose(fh); // Close the file 
-}
-
 return rRecursivo;
 
 
@@ -140,7 +129,14 @@ return rRecursivo;
 
 
 
-
+function posNTenVector(noterminal,vectorNT){  //Retorna la posicion de un NoTerminal, en su respectivo vector.
+var pos;
+for (var i = 0; i < vectorNT.length; i++) {
+	if (vectorNT[i]===noterminal) {
+ 		return i;
+	}
+}
+}
 
 
 
