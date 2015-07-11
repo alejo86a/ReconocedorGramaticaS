@@ -4,7 +4,7 @@
 * Description
 */
 angular.module('gramaticaS', []).
-controller('controladorP', ['$scope', function ($scope) {
+controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	/**
 	*Declaración de atributos
 	*/
@@ -54,6 +54,18 @@ controller('controladorP', ['$scope', function ($scope) {
 	$scope.addLambda = function(produccion){
 		produccion.der = produccion.der+'λ';
 	}
+	$scope.escribir = function(){
+		console.log("entro");
+		var peticionJS = $http.post("http://camaalu.me/sgramatica/php/sgramaticaApi.php",{peticion:'crearEjecutable'});
+		peticionJS.success(function (response) {
+			$scope.carreras = response.records;
+			console.log("Success"+response);
+
+		});
+		peticionJS.error(function(response){
+			console.log("Error"+ response);
+		});
+	}
 	$scope.borrarproduccion = function(produccion){
 		/**
 		*Tener en cuenta que si es la ultima produccion
@@ -79,5 +91,13 @@ controller('controladorP', ['$scope', function ($scope) {
 				$scope.producciones.splice(i,1);
 			}
 		}
+	}
+}])
+.controller('validacionCtrl', ['$scope', function ($scope) {
+	$scope.hilera;
+	$scope.reconocedor = new reconocedorRecursivo($scope.hilera);
+
+	$scope.validar = function(){
+		$scope.resultado = reconocedor.validar();
 	}
 }]);
