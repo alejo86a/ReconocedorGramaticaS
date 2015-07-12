@@ -54,7 +54,36 @@ function imprimeGramatica(){
 			+' '+this.producciones[i].der);
 	}
 }
-
+/**
+ * El siguiente algoritmo cumple con la funcion de construir el reconocedor Decendete recursivo.
+ * Funciona de la siguiente manera:
+ * Primero se declaran dos vectores , "rRecursivo" es un vector de String en el cual cada una de sus posiciones,
+ * le corresponde un subprograma.El tamaño de este vector es el numero de noTerminales que tenga la gramatica.
+ *
+ *En el caso de "vectorNT", es un vector donde en cada una de sus posiciones se incluye cada terminal de la gramatica sin ser
+ *repetidos.Es de gran importancia este vector, ya que nos determina el tamaño de rRecursivo y nos indica la posicion correcta 
+ *en la cual  se debe agregar cada "caso".
+ *
+ *Se procede entonces a contruir el conjunto seleccion de la gramatica.Al ser este proceso una funcion que se hace luego de haber
+ *validado que la gramatica es S , entonces nos podemos asegurar de algo. 'El conjunto seleccion de la gramatica S, son los primeros
+ *de cada produccion'.Este vector , sera utilizado como guia para saber los "casos" del reconocedor decendente. 
+ *
+ * El siguiente proceso es generar el codigo JavaScrip para el reconocedor. Se recorre el vector "vectorNT" y se guarda la plantilla
+ * principal del submetodo.
+ *
+ * 					Producciones
+ *
+ * <S> ----------------------------------->a<S>
+ * Lado izquiedo						 Lado Derecho.
+ *
+ *Si el lado izquierdo  de la produccion es igual al vector en la posicion i , se procede a generar codigo.
+ *El caso sera el valor que se encuentre en la posicion i del vector seleccion y se establecen reglas 
+ *las cuales se van agrupando en una variable llamada txt. Txt se ira modificando mientras el ciclo este recorriendo
+ *cada uno de los elementos de la produccion en su lado derecho.
+ *
+ * Al finalizar el recorrido por la produccion , se hacen unos ultimos retoques para completar el submetodo y se guarda en
+ * la posicion J correspondiente a su lugar en el vecto "vectorNT".
+ */
 
 function reconocimientoDecendene(){  //Crea el codigo recursivo del reconocimiento decendente
 	var rRecursivo=[];
@@ -95,7 +124,7 @@ function reconocimientoDecendene(){  //Crea el codigo recursivo del reconocimien
                  txt=txt+"return true"+"\n";
 
 
-       for (var i = 0; i < cont; i++) {
+       for (var i = 0; i < cont; i++) {     //Se cierran los parentesis abiertos en caso de  ser necesario.
        	txt=txt+"}"+"\n";
        };
        if(bool==1){
@@ -103,23 +132,23 @@ function reconocimientoDecendene(){  //Crea el codigo recursivo del reconocimien
                  };
 
 	
-            txt=txt+"break;"+"\n";
+            txt=txt+"break;"+"\n";                            //Break de cada case.
         	};
 
         };
 
-txt=txt+"default:"+"\n"+"return false"+"\n";
+txt=txt+"default:"+"\n"+"return false"+"\n";                 //Funciona como "De lo contrario" de los casos.
 txt=txt+"}"+"\n";
 
 
 txt=txt+"}"+"\n";
 
-   rRecursivo[j]=txt;
+   rRecursivo[j]=txt;                                      //Se guarda el texto en el vector rRecursibo
 };
 
 console.log(posNTenVector("A",vectorNT));
 console.log(rRecursivo[0]);
-return rRecursivo;
+return rRecursivo;                                          //Retornamos nuestro reconocedor decendente
 
 
 }
@@ -129,7 +158,7 @@ return rRecursivo;
 
 
 
-function posNTenVector(noterminal,vectorNT){  //Retorna la posicion de un NoTerminal, en su respectivo vector.
+function posNTenVector(noterminal,vectorNT){  //Retorna la posicion de un NoTerminal, en su respectivo vector.METODO DE UTILERIA.
 var pos;
 for (var i = 0; i < vectorNT.length; i++) {
 	if (vectorNT[i]===noterminal) {
@@ -140,7 +169,7 @@ for (var i = 0; i < vectorNT.length; i++) {
 
 
 
-function construirNT(produccion){  //Se usa para contruir los NT 
+function construirNT(produccion){  //Se usa para contruir los NT . METODO DE UTILERIA.
 var vectorNT=[];
 
 for (var i = 0; i < produccion.length; i++) {
@@ -153,7 +182,7 @@ return vectorNT;
 
 }
 
-function eliminarR(vector) { //Elimina Elementos Repetidos De Un Vector
+function eliminarR(vector) { //Elimina Elementos Repetidos De Un Vector. METODO DE UTILERIA
  var i,
      len=vector.length,
      out=[],
