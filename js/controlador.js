@@ -8,7 +8,7 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	/**
 	*Declaración de atributos
 	*/
-	$scope.estadoGramatica ='';
+	$scope.estadoGramatica ='Aceptado';
 	$scope.mostrarproducciones = false;	
 	$scope.producciones =[{
 		izq : '',
@@ -65,6 +65,9 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 		peticionJS.error(function(response){
 			console.log("Error"+ response);
 		});
+	}
+	$scope.irAValidacion = function(){
+		return 'validacion.html';
 	}
 	$scope.borrarproduccion = function(produccion){
 		/**

@@ -77,6 +77,16 @@ nav blockquote{
 }
 nav #Aceptado{
 	color: green;
+	text-decoration: none;
+	font-size : 40px;
+}
+nav #Aceptado:hover{
+	color: red;
+	font-size : 40px;
+}
+nav #Aceptado:visited{
+	background: black;
+	color: green;
 	font-size : 40px;
 }
 
