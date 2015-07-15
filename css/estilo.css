@@ -75,12 +75,17 @@ nav blockquote{
 	margin-top: -50px;
 	font-size: 40px;
 }
-nav #Aceptado{
+nav #Aceptado:link{
 	color: green;
 	text-decoration: none;
 	font-size : 40px;
 }
 nav #Aceptado:hover{
+	color: red;
+	font-size : 40px;
+}
+nav #Aceptado:active{
+	background: red;
 	color: red;
 	font-size : 40px;
 }
