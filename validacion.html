@@ -2,20 +2,26 @@
 <html ng-app="gramaticaS">
 <head>
  	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"> 
-	<title></title>
+	<title>Gramatica S</title>
 
+	<link rel="stylesheet" href="css/estilo.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 </head>
 <body>
-<div ng-controller="validacionCtrl">
-	<input type="text" ng-model="hilera">
-	<button ng-click="validar()">validar</button>
-	<span ng-model="resultado"></span>
-	{{5+5}}
+<div ng-controller="validacionCtrl" id="container">
+
+	<header>
+		<h1>VALIDADOR DE HILERA</h1>
+	</header>
+	
+	<div id="centrar">
+		<a href="index.html">Volver</a>&nbsp;&nbsp;
+		<input type="text" ng-model="hilera">
+		<button ng-click="validar()">validar</button>
+		<br><br><br>
+		<span ng-model="resultado"></span>
+	</div>
 </div>
-
-
-
 	<script type="text/javascript" src="js/controlador.js"></script>
 	<script type="text/javascript" src="js/reconocedorRecursivo.js"></script>
 	<script type="text/javascript" src="js/gramaticaS.js"></script>

@@ -9,7 +9,6 @@ body{
 	height: 100%;
 	border-radius: 5px;
 }
-
 header {
 	width: 70%;
 	margin: 0 auto;
@@ -131,6 +130,42 @@ section li button:hover{
 section li #eliminarF{
 	color: red;
 }
+
+
+/*------------------------ validacion.html -------------*/
+
+#centrar{
+	min-width: 20%;
+	min-height: 300px;
+	max-height: 40%;
+	text-align: center;
+	margin: auto auto;
+	padding-top: 100px;
+}
+#centrar a{
+	margin-top: 5px;
+	text-decoration: none;
+	font-size: 30px;
+	color: green;
+}
+#centrar input{
+	width: 30%;
+	height: 30px;
+}
+#centrar button{
+	width: 10%;
+	height: 30px;
+	color: green;
+}
+#centrar span{
+	font-size: 150px;
+	color: green;
+	text-align: center;
+}
+
+
+
+/*-------------------------end validacion.html----------------------*/
 footer {
 	position: relative;
 
