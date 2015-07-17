@@ -161,8 +161,8 @@ for (var i = 0; i < vectorNT.length; i++) {
 	txtPrinci=txtPrinci+"this.metodo"+i+"=metodo"+i+";"+"\n";
 };
 txtPrinci=txtPrinci+"\n"+"}"+"\n"+"function esHileraValida(texto){"+"\n"+   							//Configuracion de la clase, es importante mencionar que esta parte es semi-preconfigurada.
-	"var lugar=0;var res='';"+"\n"+"lugar=metodo0(this.texto,this.pos);"+"\n"+"if(this.texto[lugar]=="+"'Â¬'"+"){"+ "console.log("+"'acepto'"+");"+
-	" res="'Es Valida'";return res;}else{"+"res="'No es valida'";return res;}"+"\n"+"}"+"\n"+"function setHilera(t){"+"\n"+
+	"var lugar=0;var res='';"+"\n"+"lugar=metodo0(this.texto,this.pos);"+"\n"+"if(this.texto[lugar]=="+"'Â¬'"+"){"+
+	" return true;}else{"+"return false;}"+"\n"+"}"+"\n"+"function setHilera(t){"+"\n"+
 	"this.texto = t;"+"\n"+"}";
 rRecursivo[vectorNT.length]=txtPrinci;  //Se guarda en la ultima posicion del vector , el texto Principal, en el cual esta incluido el programa principal que llama a los submetodos.
 
