@@ -1,5 +1,13 @@
-function gramaticaS(producciones){
-	this.producciones = producciones;
+/**
+ * Clase GramaticaS
+ * Constructor y metodos de GramaticaS. 
+ * Entra como parametro las "Producciones",es decir, la gramatica, para posteriormente 
+ * construir el reconocedor Decendente , el resto de meotodos los podemos llamar de utileria.
+ * 
+ */
+
+function gramaticaS(producciones){                        
+	this.producciones = producciones;                  
 	this.validar = validar;
 	this.noHayLambdas = noHayLambdas;
 	this.noEmpiezaPorNoTerm = noEmpiezaPorNoTerm;
@@ -8,8 +16,8 @@ function gramaticaS(producciones){
 	this.reconocimientoDecendente = reconocimientoDecendente;	
 }
 
-function validar(){
-	if(this.noHayLambdas()){
+function validar(){                                                       //valida Si la gramatica es S , y envia el rror respectivo de no serlo,
+	if(this.noHayLambdas()){											 // lanza el error respectivo.			
 		if(this.noEmpiezaPorNoTerm()){
 			if(this.noHayNoTermRepPorProduc()){
 				return 0;
@@ -24,8 +32,8 @@ function validar(){
 	}
 }
 
-function noHayLambdas(){
-	for(var i=0;i<this.producciones.length;i++){
+function noHayLambdas(){                                        //Dice si en la gramatica hay produccionel , lamda ó nulas.
+	for(var i=0;i<this.producciones.length;i++){				//Una gramatica S , no tiene producciones anulanles
 		if(this.producciones[i].der.search(/Î»/)!=-1){
 			return false;
 		}else{
@@ -34,8 +42,8 @@ function noHayLambdas(){
 	}
 }
 
-function noEmpiezaPorNoTerm(){
-	for(var i=0;i<this.producciones.length;i++){
+function noEmpiezaPorNoTerm(){								//Valida si una gramatica tiene todos sus producciones iniciales empezando 
+	for(var i=0;i<this.producciones.length;i++){			//por un no terminal.
 		if(this.producciones[i].der[0]=='<'){
 			return false;
 		}else{
@@ -44,11 +52,11 @@ function noEmpiezaPorNoTerm(){
 	}
 }
 
-function noHayNoTermRepPorProduc(){
+function noHayNoTermRepPorProduc(){					
 	return true;
 }
 
-function imprimeGramatica(){
+function imprimeGramatica(){							//Metodo de utileria, sirve para revisar en consola la gramatica ingresada.
 	for(var i=0;i<this.producciones.length;i++){
 		console.log(this.producciones[i].izq
 			+' '+this.producciones[i].der);
@@ -152,14 +160,14 @@ txtPrinci="function reconocedorRecursivo(texto){"+"\n"+"this.texto=texto;"+"\n"+
 for (var i = 0; i < vectorNT.length; i++) {
 	txtPrinci=txtPrinci+"this.metodo"+i+"=metodo"+i+";"+"\n";
 };
-txtPrinci=txtPrinci+"\n"+"}"+"\n"+"function esHileraValida(texto){"+"\n"+
-	"var lugar=0;"+"\n"+"lugar=metodo0(this.texto,this.pos);"+"\n"+"if(this.texto[lugar]=="+"'Â¬'"+"){"+ "console.log("+"'acepto'"+");"+
-	"return true;}else{"+ "console.log("+"'Rechace'"+");"+"return false;}"+"\n"+"}"+"\n"+"function setHilera(t){"+"\n"+
+txtPrinci=txtPrinci+"\n"+"}"+"\n"+"function esHileraValida(texto){"+"\n"+   							//Configuracion de la clase, es importante mencionar que esta parte es semi-preconfigurada.
+	"var lugar=0;var res='';"+"\n"+"lugar=metodo0(this.texto,this.pos);"+"\n"+"if(this.texto[lugar]=="+"'Â¬'"+"){"+ "console.log("+"'acepto'"+");"+
+	" res="'Es Valida'";return res;}else{"+"res="'No es valida'";return res;}"+"\n"+"}"+"\n"+"function setHilera(t){"+"\n"+
 	"this.texto = t;"+"\n"+"}";
-rRecursivo[vectorNT.length]=txtPrinci;
+rRecursivo[vectorNT.length]=txtPrinci;  //Se guarda en la ultima posicion del vector , el texto Principal, en el cual esta incluido el programa principal que llama a los submetodos.
 
-var reconocedorFinal='';
-for (var i = 0; i < rRecursivo.length; i++) {
+var reconocedorFinal='';            //Variable auxiliar para guardar el reconocedor recursivo.
+for (var i = 0; i < rRecursivo.length; i++) { 					//Unimos toda la clase reconocedorRecursivo
 	reconocedorFinal=reconocedorFinal+rRecursivo[i];
 };
 

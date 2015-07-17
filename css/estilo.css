@@ -183,3 +183,6 @@ footer {
     text-align: center;
     color: #fff;
 }
+footer a{
+	color: black;
+}

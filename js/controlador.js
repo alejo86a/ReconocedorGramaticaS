@@ -8,9 +8,9 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	/**
 	*DeclaraciÃ³n de atributos
 	*/
-	$scope.estadoGramatica ='';
+	$scope.estadoGramatica ='';						//Forma de las "Producciones",tienen un lado derecho(Produccion) y un izquierdo(NoTerminales)
 	$scope.mostrarproducciones = false;	
-	$scope.producciones =[{
+	$scope.producciones =[{						
 		izq : '',
 		der :''
 	}];
@@ -18,13 +18,13 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	/**
 	*DeclaraciÃ³n de funciones
 	*/
-	$scope.addFila = function(){
+	$scope.addFila = function(){			//Añade una nueva fila a la gramatica
 		$scope.producciones.push({		
 			izq : '',
 			der :''
 		});
 	}
-	$scope.reiniciar = function(){
+	$scope.reiniciar = function(){  		//Reinica la gramatica a su estado inicial.
 		$scope.estadoGramatica ='';
 		$scope.producciones =[{
 			izq : '',
@@ -32,7 +32,7 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 		}];
 		$scope.gramaticaS = new gramaticaS($scope.producciones);
 	}
-	$scope.validar = function(){
+	$scope.validar = function(){						//Se valida si la gramatica es S, de no serlo, se envia un error
 		$scope.resul = $scope.gramaticaS.validar();
 		$scope.mensajesDeError = ['','Una gramatica S, no debe tener producciones anulables',
 		'En una gramatica S, todas las producciones deben iniciar al menos con un terminal',
@@ -51,7 +51,7 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	*lo que no tienen izq toca mirar si producciones 
 	*esta vacio
 	*/
-	$scope.esVacio = function(texto){
+	$scope.esVacio = function(texto){ // Se valida si el texto ingresado esta vacio.
 		if(texto==''){
 			return false;
 		}else{
@@ -61,8 +61,8 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	$scope.addLambda = function(produccion){
 		produccion.der = produccion.der+'Î»';
 	}
-	$scope.escribir = function(){
-		var codigoResultante = $scope.gramaticaS.reconocimientoDecendente();
+	$scope.escribir = function(){												//Este metodo realiza la funcion de escribir un documento nuevo por medio de php
+		var codigoResultante = $scope.gramaticaS.reconocimientoDecendente();	//Por eso se hace la peticion y se manda por parametros el codigo resultante.
 		
 		var peticionJS = $http.post("http://camaalu.me/sgramatica/php/sgramaticaApi.php",{peticion:'crearEjecutable', codigo: codigoResultante});
 		peticionJS.success(function (response) {
@@ -74,7 +74,7 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 			console.log("Error"+ response);
 		});
 	}
-	$scope.irAValidacion = function(){
+	$scope.irAValidacion = function(){  //De ser aceptada la gramatica , se da acceso al link de validacion.
 		if($scope.estadoGramatica == "Aceptado"){
 			return 'validacion.html';
 		}else{
@@ -108,12 +108,12 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 		}
 	}
 }])
-.controller('validacionCtrl', ['$scope', function ($scope) {
+.controller('validacionCtrl', ['$scope', function ($scope) {  //Controlador de validar
 	$scope.hilera ="";
-	$scope.reconocedor = new reconocedorRecursivo($scope.hilera);
+	$scope.reconocedor = new reconocedorRecursivo($scope.hilera);//Se instancia un objeto de reconocedorRecursivo
 
-	$scope.validar = function(){
-		$scope.reconocedor.setHilera($scope.hilera);
-		$scope.resultado = $scope.reconocedor.esHileraValida();
-	}
+	$scope.validar = function(){										//Se valida la hilera ingresada
+		$scope.reconocedor.setHilera($scope.hilera);					//Al objeto reconocedor de la clase reconocedorRecursivo se le aplica el metodo set hilera.
+		$scope.resultado = $scope.reconocedor.esHileraValida();			//Se aploica el metodo esHileraValida, este es el metodo principal recursivo por llamarlo de
+	}																	//otra forma.
 }]);
