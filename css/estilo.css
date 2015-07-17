@@ -71,32 +71,27 @@ nav ul li:hover{
 }
 nav blockquote{
 	float: right;
+
+	background: #ADBAD5;
 	margin-right: 20px;
 	margin-top: -50px;
 	font-size: 40px;
 }
-nav #Aceptado:link{
+nav #Aceptado:hover{
+	background: #7B8DB3;
+}
+nav #Aceptado:link, nav #Aceptado:active, nav #Aceptado:visited{
 	color: green;
 	text-decoration: none;
-	font-size : 40px;
-}
-nav #Aceptado:hover{
-	color: red;
-	font-size : 40px;
-}
-nav #Aceptado:active{
-	background: red;
-	color: red;
-	font-size : 40px;
-}
-nav #Aceptado:visited{
-	background: black;
-	color: green;
+	border: 2px solid gray;
+	border-radius: 5px;
 	font-size : 40px;
 }
 
-nav #Rechazado{
+nav #Rechazado:link, nav #Rechazado:active, nav #Rechazado:visited, nav #Rechazado:hover{
 	color: Red;
+	cursor: text;
+	text-decoration: none;
 	font-size : 40px;
 }
 section{

@@ -6,9 +6,9 @@
 angular.module('gramaticaS', []).
 controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	/**
-	*Declaración de atributos
+	*DeclaraciÃ³n de atributos
 	*/
-	$scope.estadoGramatica ='Aceptado';
+	$scope.estadoGramatica ='';
 	$scope.mostrarproducciones = false;	
 	$scope.producciones =[{
 		izq : '',
@@ -16,7 +16,7 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	}];
 	$scope.gramaticaS = new gramaticaS($scope.producciones);
 	/**
-	*Declaración de funciones
+	*DeclaraciÃ³n de funciones
 	*/
 	$scope.addFila = function(){
 		$scope.producciones.push({		
@@ -34,10 +34,17 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 	}
 	$scope.validar = function(){
 		$scope.resul = $scope.gramaticaS.validar();
-		console.log('error: '+$scope.resul);
-		$scope.gramaticaS.imprimeGramatica();
-		$scope.gramaticaS.reconocimientoDecendente();
-		
+		$scope.mensajesDeError = ['','Una gramatica S, no debe tener producciones anulables',
+		'En una gramatica S, todas las producciones deben iniciar al menos con un terminal',
+		'En una gramatica S, no deben haber producciones repetidas'];
+		if($scope.resul!=0){
+			alert('Error: '+$scope.mensajesDeError[$scope.resul]+'\n Revise su gramatica');
+			$scope.estadoGramatica = 'Rechazado';
+		}else{
+			$scope.escribir();
+			$scope.estadoGramatica = 'Aceptado';
+		}		
+		$scope.gramaticaS.imprimeGramatica();		
 	}
 	/**
 	*cambiar el metodo porque simplemente no esta mostrando
@@ -52,11 +59,12 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 		}
 	}
 	$scope.addLambda = function(produccion){
-		produccion.der = produccion.der+'λ';
+		produccion.der = produccion.der+'Î»';
 	}
 	$scope.escribir = function(){
-		console.log("entro");
-		var peticionJS = $http.post("http://camaalu.me/sgramatica/php/sgramaticaApi.php",{peticion:'crearEjecutable'});
+		var codigoResultante = $scope.gramaticaS.reconocimientoDecendente();
+		
+		var peticionJS = $http.post("http://camaalu.me/sgramatica/php/sgramaticaApi.php",{peticion:'crearEjecutable', codigo: codigoResultante});
 		peticionJS.success(function (response) {
 			$scope.carreras = response.records;
 			console.log("Success"+response);
@@ -67,7 +75,11 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 		});
 	}
 	$scope.irAValidacion = function(){
-		return 'validacion.html';
+		if($scope.estadoGramatica == "Aceptado"){
+			return 'validacion.html';
+		}else{
+			return '';
+		}
 	}
 	$scope.borrarproduccion = function(produccion){
 		/**
