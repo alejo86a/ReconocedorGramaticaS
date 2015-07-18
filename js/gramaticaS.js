@@ -52,8 +52,20 @@ function noEmpiezaPorNoTerm(){								//Valida si una gramatica tiene todos sus 
 	}
 }
 
-function noHayNoTermRepPorProduc(){					
-	return true;
+function noHayNoTermRepPorProduc(){	
+	var result=true;				
+	for(var i=0;i<this.producciones.length;i++){			//por un no terminal.
+		for (var j = i+1; j < this.producciones.length; j++) {
+			if(result){
+				if(this.producciones[i].der[0]==this.producciones[j].der[0]){
+					result = false;
+				}else{
+					result = true;
+				}
+			}
+		}
+	}
+	return result;
 }
 
 function imprimeGramatica(){							//Metodo de utileria, sirve para revisar en consola la gramatica ingresada.

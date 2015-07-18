@@ -107,10 +107,10 @@ controller('controladorP', ['$scope', '$http', function ($scope,$http) {
 }])
 .controller('validacionCtrl', ['$scope', function ($scope) {
 	$scope.hilera ="";
-	$scope.reconocedor = new reconocedorRecursivo($scope.hilera);
+	$scope.reconocedor = new reconocedorRecursivo($scope.hilera+'¬');
 
 	$scope.validar = function(){
-		$scope.reconocedor.setHilera($scope.hilera);
+		$scope.reconocedor.setHilera($scope.hilera+'¬');
 		$scope.resul = $scope.reconocedor.esHileraValida();
 		if($scope.resul==true){
 			$scope.resultado='Es valida';
